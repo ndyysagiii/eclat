@@ -22,7 +22,7 @@ return new class extends Migration
             $table->float('lift_ratio');
             $table->float('confidence');
             $table->string('result_type'); // e.g., "2-item" or "3-item"
-            $table->sting('keterangan');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }
