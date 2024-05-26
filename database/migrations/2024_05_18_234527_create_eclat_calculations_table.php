@@ -11,18 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('eclat_results', function (Blueprint $table) {
+        Schema::create('eclat_calculations', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal_dari');
             $table->date('tanggal_sampai');
-            $table->float('min_support');
-            $table->float('min_confidance');
-            $table->text('itemset');
-            $table->float('support');
-            $table->float('lift_ratio');
-            $table->float('confidence');
-            $table->string('result_type'); // e.g., "2-item" or "3-item"
-            $table->sting('keterangan');
+            $table->decimal('min_support', 5, 2);
+            $table->decimal('min_confidance', 5, 2);
             $table->timestamps();
         });
     }
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('eclat_result');
+        Schema::dropIfExists('eclat_calculations');
     }
 };

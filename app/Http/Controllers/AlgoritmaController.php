@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EclatCalculation;
 use App\Models\EclatResult;
 use App\Models\EclatResultDetail;
 use App\Models\Transaksi;
@@ -21,6 +22,13 @@ class AlgoritmaController extends Controller
         $tanggal_sampai = $request->input('tanggal_sampai');
         $min_support = $request->input('min_support');
         $min_confidance = $request->input('min_confidance');
+
+        $calculation = EclatCalculation::create([
+            'tanggal_dari' => $tanggal_dari,
+            'tanggal_sampai' => $tanggal_sampai,
+            'min_support' => $min_support,
+            'min_confidance' => $min_confidance,
+        ]);
 
         $transaksi = Transaksi::with(['detail'])->whereBetween('tanggal_transaksi', [$tanggal_dari, $tanggal_sampai])->get();
         $dataVertikal = $this->convertToVerticalFormat($transaksi);
@@ -48,10 +56,7 @@ class AlgoritmaController extends Controller
 
                     // Save Eclat Result
                     $eclatResult = EclatResult::create([
-                        'tanggal_dari' => $tanggal_dari,
-                        'tanggal_sampai' => $tanggal_sampai,
-                        'min_support' => $min_support,
-                        'min_confidance' => $min_confidance,
+                        'eclat_calculation_id' => $calculation->id,
                         'itemset' => $itemset,
                         'support' => $supportCount / $totalTransactions,
                         'confidence' => $confidence,
@@ -63,8 +68,9 @@ class AlgoritmaController extends Controller
                     // Save Eclat Result Details
                     foreach (explode(',', $itemset) as $obat_id) {
                         EclatResultDetail::create([
+                            'eclat_calculation_id' => $calculation->id,
+                            'eclat_result_id' => $eclatResult->id,
                             'obat_id' => $obat_id,
-                            'eclat_result_id' => $eclatResult->id
                         ]);
                     }
                 }

@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('eclat_result_details', function (Blueprint $table) {
-            // $table->id();
+        Schema::table('eclat_results', function (Blueprint $table) {
             $table->foreignId('eclat_calculation_id')->constrained('eclat_calculations')->onDelete('cascade');
-            $table->foreignId('eclat_result_id')->constrained('eclat_results')->onDelete('cascade');
-            $table->unsignedBigInteger('obat_id');
-            $table->timestamps();
         });
     }
 
@@ -25,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('eclat_result_details');
+        Schema::table('eclat_result', function (Blueprint $table) {
+            $table->dropForeign(['eclat_calculation_id']);
+            $table->dropColumn('eclat_calculation_id');
+        });
     }
 };
