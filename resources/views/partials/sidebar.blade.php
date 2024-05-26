@@ -30,15 +30,6 @@
                     <span class="hide-menu">Layanan</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ Route::is('transaksi') ? 'active' : '' }}" href="/transaksi"
-                        aria-expanded="false">
-                        <span>
-                            <i class="ti ti-article"></i>
-                        </span>
-                        <span class="hide-menu">Transaksi</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
                     <a class="sidebar-link {{ Route::is('obat') ? 'active' : '' }}" href="/obat"
                         aria-expanded="false">
                         <span>
@@ -47,6 +38,16 @@
                         <span class="hide-menu">Obat</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ Route::is('transaksi') ? 'active' : '' }}" href="/transaksi"
+                        aria-expanded="false">
+                        <span>
+                            <i class="ti ti-article"></i>
+                        </span>
+                        <span class="hide-menu">Transaksi</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ Route::is('algoritma') ? 'active' : '' }}" href="/algoritma"
                         aria-expanded="false">
@@ -57,7 +58,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+                    <a class="sidebar-link {{ Route::is('hasil') ? 'active' : '' }}" href="/hasil"
+                        aria-expanded="false">
                         <span>
                             <i class="ti ti-cards"></i>
                         </span>

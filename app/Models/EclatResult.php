@@ -9,20 +9,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class EclatResult extends Model
 {
     use HasFactory;
-    protected $table = 'eclat_result';
     protected $fillable = [
-        'tanggal_dari',
-        'tanggal_sampai',
-        'min_support',
-        'min_confidance',
-        'itemset',
-        'lift_ratio',
-        'support',
-        'confidence',
-        'result_type',
-        'keterangan'
+        'eclat_calculation_id', 'itemset', 'support', 'confidence',
+        'result_type', 'keterangan', 'lift_ratio'
     ];
-    public function eclatResultDetails(): HasMany
+
+    public function calculation()
+    {
+        return $this->belongsTo(EclatCalculation::class);
+    }
+
+    public function details()
     {
         return $this->hasMany(EclatResultDetail::class);
     }

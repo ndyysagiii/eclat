@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlgoritmaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HasilController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\TransaksiController;
@@ -24,3 +25,6 @@ Route::delete('/obat-delete/{id}', [ObatController::class, 'delete'])->name('oba
 
 Route::get('/algoritma', [AlgoritmaController::class, 'index'])->name('algoritma')->middleware('auth');
 Route::get('/transaksi/filter', [AlgoritmaController::class, 'filter'])->name('transaksi.filter')->middleware('auth');
+
+Route::get('/hasil', [HasilController::class, 'index'])->name('hasil')->middleware('auth');
+Route::get('/hasil-detail/{id}', [HasilController::class, 'show'])->name('hasil.detail')->middleware('auth');
