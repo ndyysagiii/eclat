@@ -13,16 +13,12 @@ return new class extends Migration
     {
         Schema::create('eclat_results', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal_dari');
-            $table->date('tanggal_sampai');
-            $table->float('min_support');
-            $table->float('min_confidance');
-            $table->text('itemset');
-            $table->float('support');
-            $table->float('lift_ratio');
-            $table->float('confidence');
-            $table->string('result_type'); // e.g., "2-item" or "3-item"
-            $table->sting('keterangan');
+            $table->string('itemset');
+            $table->decimal('support', 5, 2);
+            $table->decimal('confidence', 5, 2);
+            $table->string('result_type');
+            $table->string('keterangan');
+            $table->decimal('lift_ratio', 5, 2);
             $table->timestamps();
         });
     }
